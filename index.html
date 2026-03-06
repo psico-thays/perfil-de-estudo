@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubra seu Perfil de Estudo - Vestibular</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
+        body { font-family: sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); text-align: center; }
+        .question { margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
+        p { font-weight: bold; margin-bottom: 10px; }
+        label { display: block; background: #f1f5f9; padding: 10px; margin: 5px 0; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        label:hover { background: #e2e8f0; }
+        input { margin-right: 10px; }
+        button { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #1d4ed8; }
+        #result { margin-top: 30px; padding: 20px; border-radius: 8px; display: none; }
+        .visual { border-left: 5px solid #3b82f6; background: #eff6ff; }
+        .auditivo { border-left: 5px solid #10b981; background: #ecfdf5; }
+        .leitura { border-left: 5px solid #f59e0b; background: #fffbeb; }
+        .cinestesico { border-left: 5px solid #ef4444; background: #fef2f2; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Perfil de Estudo ✍️</h1>
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Ao aprender um conteúdo novo de Exatas, o que mais te ajuda?</p>
+            <label><input type="radio" name="q1" value="visual" required> Ver um infográfico ou diagrama.</label>
+            <label><input type="radio" name="q1" value="auditivo"> Ouvir o professor explicando o passo a passo.</label>
+            <label><input type="radio" name="q1" value="cinestesico"> Fazer exercícios práticos imediatamente.</label>
+            <label><input type="radio" name="q1" value="leitura"> Ler a teoria detalhada na apostila.</label>
+        </div>
+
+        <div class="question">
+            <p>2. Como é o seu resumo ideal para Humanas?</p>
+            <label><input type="radio" name="q2" value="visual"> Mapas mentais coloridos e setas.</label>
+            <label><input type="radio" name="q2" value="auditivo"> Um áudio gravado ou debate com colegas.</label>
+            <label><input type="radio" name="q2" value="cinestesico"> Resolver provas anteriores do tema.</label>
+            <label><input type="radio" name="q2" value="leitura"> Páginas de anotações e tópicos escritos.</label>
+        </div>
+
+        <button type="button" onclick="calculateResult()">Ver Meu Perfil</button>
+    </form>
+
+    <div id="result">
+        <h2 id="resultTitle"></h2>
+        <p id="resultText"></p>
+        <div id="tips"></div>
+    </div>
+</div>
+
+<script>
+    function calculateResult() {
+        const form = document.getElementById('quizForm');
+        const formData = new FormData(form);
+        const scores = { visual: 0, auditivo: 0, leitura: 0, cinestesico: 0 };
+        
+        // Contabiliza os votos
+        for (let value of formData.values()) {
+            scores[value]++;
+        }
+
+        // Determina o vencedor
+        const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        
+        displayResult(winner);
+    }
+
+    function displayResult(profile) {
+        const resultDiv = document.getElementById('result');
+        const title = document.getElementById('resultTitle');
+        const tips = document.getElementById('tips');
+
+        resultDiv.style.display = 'block';
+        resultDiv.className = profile; // Muda a cor de acordo com o perfil
+
+        const content = {
+            visual: {
+                t: "Você é o Estrategista Visual!",
+                d: "Use mapas mentais e cores. No dia da prova, você 'fotografará' a resposta na sua mente."
+            },
+            auditivo: {
+                t: "Você é o Mestre Auditivo!",
+                d: "Ouça podcasts e explique a matéria para si mesmo em voz alta."
+            },
+            leitura: {
+                t: "Você é o Analista de Leitura/Escrita!",
+                d: "Faça resumos detalhados e checklists. Escrever é o seu segredo para fixar."
+            },
+            cinestesico: {
+                t: "Você é o Executor Cinestésico!",
+                d: "Vá direto para os exercícios. Seu corpo precisa de ação para aprender."
+            }
+        };
+
+        title.innerText = content[profile].t;
+        tips.innerHTML = `<strong>Dica de Ouro:</strong> ${content[profile].d}`;
+        
+        // Rola a tela até o resultado
+        resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
