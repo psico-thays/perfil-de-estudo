@@ -3,58 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descubra seu Perfil de Estudo - Vestibular</title>
+    <title>Diagnóstico de Perfil de Estudo - Vestibular</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --bg: #f8fafc;
-            --text: #1e293b;
-        }
-        body { font-family: sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { color: var(--primary); text-align: center; }
-        .question { margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
-        p { font-weight: bold; margin-bottom: 10px; }
-        label { display: block; background: #f1f5f9; padding: 10px; margin: 5px 0; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-        label:hover { background: #e2e8f0; }
-        input { margin-right: 10px; }
-        button { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 20px; }
-        button:hover { background: #1d4ed8; }
-        #result { margin-top: 30px; padding: 20px; border-radius: 8px; display: none; }
-        .visual { border-left: 5px solid #3b82f6; background: #eff6ff; }
-        .auditivo { border-left: 5px solid #10b981; background: #ecfdf5; }
-        .leitura { border-left: 5px solid #f59e0b; background: #fffbeb; }
-        .cinestesico { border-left: 5px solid #ef4444; background: #fef2f2; }
+        :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); text-align: center; margin-bottom: 30px; }
+        .question { margin-bottom: 30px; border-bottom: 1px solid #f1f5f9; padding-bottom: 20px; }
+        p.q-text { font-weight: 600; font-size: 1.1em; margin-bottom: 15px; color: #334155; }
+        label { display: block; background: #f8fafc; padding: 12px; margin: 8px 0; border-radius: 8px; cursor: pointer; border: 1px solid #e2e8f0; transition: 0.3s; }
+        label:hover { background: #eff6ff; border-color: var(--primary); }
+        input { margin-right: 12px; transform: scale(1.2); }
+        button { width: 100%; background: var(--primary); color: white; border: none; padding: 18px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        button:hover { background: #1d4ed8; transform: translateY(-2px); }
+        #result { margin-top: 40px; padding: 30px; border-radius: 12px; display: none; animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .visual { border-top: 8px solid #3b82f6; background: #eff6ff; }
+        .auditivo { border-top: 8px solid #10b981; background: #ecfdf5; }
+        .leitura { border-top: 8px solid #f59e0b; background: #fffbeb; }
+        .cinestesico { border-top: 8px solid #ef4444; background: #fef2f2; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Perfil de Estudo ✍️</h1>
+    <h1>🎯 Meu Perfil de Estudo</h1>
     <form id="quizForm">
+        
         <div class="question">
-            <p>1. Ao aprender um conteúdo novo de Exatas, o que mais te ajuda?</p>
-            <label><input type="radio" name="q1" value="visual" required> Ver um infográfico ou diagrama.</label>
-            <label><input type="radio" name="q1" value="auditivo"> Ouvir o professor explicando o passo a passo.</label>
-            <label><input type="radio" name="q1" value="cinestesico"> Fazer exercícios práticos imediatamente.</label>
-            <label><input type="radio" name="q1" value="leitura"> Ler a teoria detalhada na apostila.</label>
+            <p class="q-text">1. Ao aprender um conteúdo novo de Exatas (como Funções ou Estequiometria), o que mais te ajuda?</p>
+            <label><input type="radio" name="q1" value="visual" required> Ver um infográfico ou o professor desenhando no quadro.</label>
+            <label><input type="radio" name="q1" value="auditivo"> Ouvir a explicação passo a passo do raciocínio.</label>
+            <label><input type="radio" name="q1" value="leitura"> Ler a demonstração da fórmula no livro/apostila.</label>
+            <label><input type="radio" name="q1" value="cinestesico"> Tentar resolver um exercício mesmo sem saber tudo.</label>
         </div>
 
         <div class="question">
-            <p>2. Como é o seu resumo ideal para Humanas?</p>
-            <label><input type="radio" name="q2" value="visual"> Mapas mentais coloridos e setas.</label>
-            <label><input type="radio" name="q2" value="auditivo"> Um áudio gravado ou debate com colegas.</label>
-            <label><input type="radio" name="q2" value="cinestesico"> Resolver provas anteriores do tema.</label>
-            <label><input type="radio" name="q2" value="leitura"> Páginas de anotações e tópicos escritos.</label>
+            <p class="q-text">2. Como você prefere revisar matérias de Humanas (História/Geografia)?</p>
+            <label><input type="radio" name="q2" value="visual"> Olhando mapas mentais, linhas do tempo ou fotos da época.</label>
+            <label><input type="radio" name="q2" value="auditivo"> Ouvindo um podcast ou conversando sobre o tema com amigos.</label>
+            <label><input type="radio" name="q2" value="leitura"> Lendo meus resumos em tópicos ou o texto do livro.</label>
+            <label><input type="radio" name="q2" value="cinestesico"> Fazendo simulações de debates ou resolvendo questões antigas.</label>
         </div>
 
-        <button type="button" onclick="calculateResult()">Ver Meu Perfil</button>
+        <div class="question">
+            <p class="q-text">3. Qual a melhor forma de você ter ideias para o tema da redação?</p>
+            <label><input type="radio" name="q3" value="visual"> Assistindo a documentários ou filmes sobre atualidades.</label>
+            <label><input type="radio" name="q3" value="auditivo"> Ouvindo rádio, notícias ou discussões em vídeo.</label>
+            <label><input type="radio" name="q3" value="leitura"> Lendo artigos de opinião, jornais ou repertórios escritos.</label>
+            <label><input type="radio" name="q3" value="cinestesico"> Escrevendo rascunhos rápidos e testando teses no papel.</label>
+        </div>
+
+        <div class="question">
+            <p class="q-text">4. Se você esquece como se escreve uma palavra difícil, você:</p>
+            <label><input type="radio" name="q4" value="visual"> Tenta "enxergar" a palavra escrita na sua mente.</label>
+            <label><input type="radio" name="q4" value="auditivo"> Fala a palavra alto para ouvir os sons das letras.</label>
+            <label><input type="radio" name="q4" value="leitura"> Pensa na regra gramatical ou como ela aparece nos livros.</label>
+            <label><input type="radio" name="q4" value="cinestesico"> Escreve a palavra no papel para ver se a mão "reconhece".</label>
+        </div>
+
+        <div class="question">
+            <p class="q-text">5. O que mais te distrai durante um simulado longo?</p>
+            <label><input type="radio" name="q5" value="visual"> Movimento de pessoas na sala ou coisas fora do lugar.</label>
+            <label><input type="radio" name="q5" value="auditivo"> Barulhos externos, conversas ou o som do ventilador.</label>
+            <label><input type="radio" name="q5" value="leitura"> Ter que ler textos muito longos e repetitivos.</label>
+            <label><input type="radio" name="q5" value="cinestesico"> Ter que ficar sentado na mesma posição por muito tempo.</label>
+        </div>
+
+        <div class="question">
+            <p class="q-text">6. Ao receber as orientações de um trabalho escolar, você prefere:</p>
+            <label><input type="radio" name="q6" value="visual"> Ver um exemplo pronto do que deve ser feito.</label>
+            <label><input type="radio" name="q6" value="auditivo"> Que o professor explique detalhadamente as regras.</label>
+            <label><input type="radio" name="q6" value="leitura"> Receber um guia impresso com as instruções por escrito.</label>
+            <label><input type="radio" name="q6" value="cinestesico"> Começar a fazer e tirar as dúvidas conforme elas surgem.</label>
+        </div>
+
+        <div class="question">
+            <p class="q-text">7. Para decorar uma fórmula ou conceito jurídico, você:</p>
+            <label><input type="radio" name="q7" value="visual"> Usa cores diferentes para cada parte da fórmula.</label>
+            <label><input type="radio" name="q7" value="auditivo"> Cria uma música, rima ou frase engraçada com o som.</label>
+            <label><input type="radio" name="q7" value="leitura"> Escreve a mesma fórmula várias vezes no caderno.</label>
+            <label><input type="radio" name="q7" value="cinestesico"> Faz gestos com as mãos ou associa a um movimento corporal.</label>
+        </div>
+
+        <div class="question">
+            <p class="q-text">8. Quando você erra uma questão, você aprende mais:</p>
+            <label><input type="radio" name="q8" value="visual"> Vendo a resolução comentada em vídeo ou imagem.</label>
+            <label><input type="radio" name="q8" value="auditivo"> Ouvindo alguém explicar onde foi o seu erro.</label>
+            <label><input type="radio" name="q8" value="leitura"> Lendo a explicação escrita detalhada da questão.</label>
+            <label><input type="radio" name="q8" value="cinestesico"> Refazendo a questão do zero imediatamente.</label>
+        </div>
+
+        <div class="question">
+            <p class="q-text">9. No final de um dia exaustivo de estudos, o que você menos aguenta?</p>
+            <label><input type="radio" name="q9" value="visual"> Olhar para telas ou luzes fortes.</label>
+            <label><input type="radio" name="q9" value="auditivo"> Pessoas falando alto ou muito barulho.</label>
+            <label><input type="radio" name="q9" value="leitura"> Ter que ler mais uma página de qualquer assunto.</label>
+            <label><input type="radio" name="q9" value="cinestesico"> Ficar parado na cadeira; seu corpo pede movimento.</label>
+        </div>
+
+        <div class="question">
+            <p class="q-text">10. Como você planeja sua semana de estudos?</p>
+            <label><input type="radio" name="q10" value="visual"> Uso um planner visual, mural ou Google Agenda colorido.</label>
+            <label><input type="radio" name="q10" value="auditivo"> Falo para mim mesmo o que preciso fazer ou uso lembretes de voz.</label>
+            <label><input type="radio" name="q10" value="leitura"> Escrevo uma lista de tarefas (to-do list) detalhada.</label>
+            <label><input type="radio" name="q10" value="cinestesico"> Sigo um ritmo baseado nas matérias que sinto mais vontade de fazer.</label>
+        </div>
+
+        <button type="button" onclick="calculateResult()">Finalizar e Ver Resultado</button>
     </form>
 
     <div id="result">
         <h2 id="resultTitle"></h2>
-        <p id="resultText"></p>
-        <div id="tips"></div>
+        <div id="resultContent"></div>
     </div>
 </div>
 
@@ -62,50 +124,49 @@
     function calculateResult() {
         const form = document.getElementById('quizForm');
         const formData = new FormData(form);
-        const scores = { visual: 0, auditivo: 0, leitura: 0, cinestesico: 0 };
         
-        // Contabiliza os votos
-        for (let value of formData.values()) {
-            scores[value]++;
+        // Verifica se todas as 10 perguntas foram respondidas
+        if (Array.from(formData.keys()).length < 10) {
+            alert("Por favor, responda todas as 10 perguntas antes de continuar!");
+            return;
         }
 
-        // Determina o vencedor
+        const scores = { visual: 0, auditivo: 0, leitura: 0, cinestesico: 0 };
+        for (let value of formData.values()) { scores[value]++; }
+
         const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-        
         displayResult(winner);
     }
 
     function displayResult(profile) {
         const resultDiv = document.getElementById('result');
         const title = document.getElementById('resultTitle');
-        const tips = document.getElementById('tips');
+        const content = document.getElementById('resultContent');
 
         resultDiv.style.display = 'block';
-        resultDiv.className = profile; // Muda a cor de acordo com o perfil
+        resultDiv.className = profile;
 
-        const content = {
+        const data = {
             visual: {
-                t: "Você é o Estrategista Visual!",
-                d: "Use mapas mentais e cores. No dia da prova, você 'fotografará' a resposta na sua mente."
+                t: "👁️ Você é Visual!",
+                c: "Sua memória é fotográfica. <br><strong>Dicas:</strong> Use mapas mentais, flashcards coloridos e assista a videoaulas com muitos gráficos. No dia da prova, tente 'escanear' a página na sua mente."
             },
             auditivo: {
-                t: "Você é o Mestre Auditivo!",
-                d: "Ouça podcasts e explique a matéria para si mesmo em voz alta."
+                t: "👂 Você é Auditivo!",
+                c: "Você aprende pelo som. <br><strong>Dicas:</strong> Explique a matéria para si mesmo em voz alta, ouça podcasts sobre os temas e use rimas para decorar fórmulas."
             },
             leitura: {
-                t: "Você é o Analista de Leitura/Escrita!",
-                d: "Faça resumos detalhados e checklists. Escrever é o seu segredo para fixar."
+                t: "📝 Você é Leitura/Escrita!",
+                c: "Seu foco está no texto. <br><strong>Dicas:</strong> Faça resumos escritos, checklists e transforme gráficos em parágrafos. Ler a teoria com atenção é seu maior trunfo."
             },
             cinestesico: {
-                t: "Você é o Executor Cinestésico!",
-                d: "Vá direto para os exercícios. Seu corpo precisa de ação para aprender."
+                t: "🏃 Você é Cinestésico!",
+                c: "Você aprende na prática. <br><strong>Dicas:</strong> Resolva o máximo de questões possíveis. Faça pausas ativas para caminhar e estude simulando o ambiente real da prova."
             }
         };
 
-        title.innerText = content[profile].t;
-        tips.innerHTML = `<strong>Dica de Ouro:</strong> ${content[profile].d}`;
-        
-        // Rola a tela até o resultado
+        title.innerText = data[profile].t;
+        content.innerHTML = `<p style="font-size: 1.2em;">${data[profile].c}</p>`;
         resultDiv.scrollIntoView({ behavior: 'smooth' });
     }
 </script>
